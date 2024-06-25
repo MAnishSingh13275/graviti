@@ -16,9 +16,9 @@ const libraries = ["places"];
 const MapComponent = () => {
   const [map, setMap] = useState(null);
   const [directions, setDirections] = useState(null);
-  const [origin, setOrigin] = useState(null); // Changed initial state of origin to null
-  const [destination, setDestination] = useState(null); // Changed initial state of destination to null
-  const [waypoints, setWaypoints] = useState([]); // Changed initial state of waypoints to an empty array
+  const [origin, setOrigin] = useState(null);
+  const [destination, setDestination] = useState(null);
+  const [waypoints, setWaypoints] = useState([]);
   const [distance, setDistance] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -93,12 +93,12 @@ const MapComponent = () => {
           } else {
             console.error(`error fetching directions ${result}`);
           }
-          setLoading(false); // Moved setLoading inside the callback to ensure it's correctly handled
+          setLoading(false);
         }
       );
     } else {
       console.error("Origin or destination is not set");
-      setLoading(false); // Added setLoading(false) in case of early return
+      setLoading(false);
     }
   };
 
@@ -107,8 +107,8 @@ const MapComponent = () => {
       <div className="p-6 bg-gray-50 min-h-screen">
         <div className="flex justify-center">
           <h1 className="text-2xl text-[#1B31A8] mb-4">
-            Let's calculate <span className="font-bold">distance</span> from
-            Google maps
+            Let&apos;s calculate <span className="font-bold">distance</span>{" "}
+            from Google maps
           </h1>
         </div>
         <div className="flex flex-col-reverse md:flex-row items-center md:items-start">
