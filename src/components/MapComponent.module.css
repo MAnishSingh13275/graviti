@@ -1,0 +1,80 @@
+/* components/MapComponent.module.css */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .inputs {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .inputGroup label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .addButton {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .calculateButton {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .calculateButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .mapContainer {
+    height: 400px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+  }
+  
+  .distance {
+    text-align: center;
+  }
+  
+  .distance h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .distance h2 span {
+    color: #007bff;
+  }
+  
+  .distance p {
+    margin: 5px 0 0 0;
+  }
+  
