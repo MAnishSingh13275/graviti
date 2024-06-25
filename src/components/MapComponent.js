@@ -16,9 +16,9 @@ const libraries = ["places"];
 const MapComponent = () => {
   const [map, setMap] = useState(null);
   const [directions, setDirections] = useState(null);
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [waypoints, setWaypoints] = useState([]);
+  const [origin, setOrigin] = useState(null); // Changed initial state of origin to null
+  const [destination, setDestination] = useState(null); // Changed initial state of destination to null
+  const [waypoints, setWaypoints] = useState([]); // Changed initial state of waypoints to an empty array
   const [distance, setDistance] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +45,10 @@ const MapComponent = () => {
     }
 
     if (place && place.geometry) {
-      const location = place.geometry.location;
+      const location = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng(),
+      };
       if (type === "origin") {
         setOrigin(location);
       } else if (type === "destination") {
@@ -90,11 +93,13 @@ const MapComponent = () => {
           } else {
             console.error(`error fetching directions ${result}`);
           }
+          setLoading(false); // Moved setLoading inside the callback to ensure it's correctly handled
         }
       );
+    } else {
+      console.error("Origin or destination is not set");
+      setLoading(false); // Added setLoading(false) in case of early return
     }
-
-    setLoading(false);
   };
 
   return (
@@ -128,9 +133,13 @@ const MapComponent = () => {
               <div className="w-full">
                 {waypoints.map((_, index) => (
                   <div key={index} className="">
-                    <label className="block mb-2 text-gray-700">Stop</label>
+                    <label className="block mb-2 text-gray-700">
+                      Stop {index + 1}
+                    </label>
                     <Autocomplete
-                      onLoad={(autocomplete) => handleLoad(autocomplete, index)}
+                      onLoad={(autocomplete) =>
+                        handleLoad(autocomplete, index)
+                      }
                       onPlaceChanged={() =>
                         handlePlaceChanged("waypoint", index)
                       }
@@ -153,7 +162,9 @@ const MapComponent = () => {
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block mb-2 text-gray-700">Destination</label>
+                <label className="block mb-2 text-gray-700">
+                  Destination
+                </label>
                 <Autocomplete
                   onLoad={(autocomplete) =>
                     (destinationRef.current = autocomplete)
@@ -178,7 +189,9 @@ const MapComponent = () => {
                       <span className="text-blue-600">{distance}</span>
                     </div>
                   </div>
-                  <p className="my-5">The distance between the selected points is {distance}.</p>
+                  <p className="my-5">
+                    The distance between the selected points is {distance}.
+                  </p>
                 </div>
               )}
             </div>
